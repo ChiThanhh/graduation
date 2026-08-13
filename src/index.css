@@ -677,6 +677,32 @@ main,
   margin: 0 0 22px;
 }
 
+.letter-body--typewriter {
+  position: relative;
+  min-height: 1px;
+  white-space: pre-line;
+}
+
+.typewriter-ghost {
+  display: block;
+  color: transparent;
+  pointer-events: none;
+  user-select: none;
+  white-space: pre-line;
+}
+
+.typewriter-live {
+  position: absolute;
+  inset: 0;
+  display: block;
+  white-space: pre-line;
+}
+
+.typewriter-live .Typewriter__cursor,
+.typewriter-live span:last-child {
+  color: var(--pink-strong);
+}
+
 .name-underline {
   position: relative;
   display: inline-block;
@@ -701,6 +727,7 @@ main,
 }
 
 .letter-signature {
+  position: relative;
   margin: 24px 0 0;
   font-family: "Patrick Hand", cursive;
   font-size: 1.8rem;
@@ -761,7 +788,26 @@ main,
 }
 
 .letter-photo-tape {
-  display: none;
+  position: absolute;
+  z-index: 5;
+  top: -11px;
+  left: 50%;
+  width: 86px;
+  height: 24px;
+  pointer-events: none;
+  background: rgb(251 231 161 / 0.76);
+  border-radius: 4px;
+  transform: translateX(-50%) rotate(-6deg);
+}
+
+.letter-photo-tape--2 {
+  background: rgb(205 231 245 / 0.78);
+  transform: translateX(-50%) rotate(7deg);
+}
+
+.letter-photo-tape--3 {
+  background: rgb(221 212 247 / 0.78);
+  transform: translateX(-50%) rotate(-3deg);
 }
 
 .event-section {
