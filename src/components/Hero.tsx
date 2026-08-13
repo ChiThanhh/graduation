@@ -32,7 +32,7 @@ export function Hero({ guestName }: HeroProps) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.55, delay: 0.15 }}
         >
-          thư nhỏ xinh này là của bạn
+          thư nhỏ xinh này là của anh/chị ♡
         </motion.p>
         <h1 id="hero-title+">Hey, {guestName}! ♡</h1>
         <motion.p
