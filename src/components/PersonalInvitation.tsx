@@ -17,7 +17,7 @@ export function PersonalInvitation({ guestName }: PersonalInvitationProps) {
             <div className="letter-content">
               <p className="letter-date">a little note</p>
               <h2 id="invitation-title">
-                Dear <span className="name-underline">{guestName}</span>,
+                Dear <span className="name-underline">{guestName}</span>
               </h2>
 
               <div className="letter-body">
