@@ -28,7 +28,7 @@ export function EventDetails() {
       <div className="section-inner">
         <Reveal>
           <SectionHeading eyebrow="save this" title="Save the date ♡">
-            <p>Để dành một góc lịch cho mình nha.</p>
+            <p>Để dành một góc lịch cho em nha.</p>
           </SectionHeading>
         </Reveal>
 

@@ -9,7 +9,6 @@ import { Hero } from "./components/Hero"
 import { Location } from "./components/Location"
 import { MusicToggle } from "./components/MusicToggle"
 import { PersonalInvitation } from "./components/PersonalInvitation"
-import { PhotoGallery } from "./components/PhotoGallery"
 import { useGuestName } from "./hooks/useGuestName"
 
 function GraduationInvitation({
@@ -38,7 +37,6 @@ function GraduationInvitation({
       <main>
         <Hero guestName={guestName} />
         <GraduationReveal />
-        <PhotoGallery />
         <PersonalInvitation guestName={guestName} />
         <EventDetails />
         <Location />

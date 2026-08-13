@@ -34,7 +34,7 @@ export function Hero({ guestName }: HeroProps) {
         >
           thư nhỏ xinh này là của bạn
         </motion.p>
-        <h1 id="hero-title">Hey, {guestName}! ♡</h1>
+        <h1 id="hero-title+">Hey, {guestName}! ♡</h1>
         <motion.p
           className="hero-copy"
           initial={reduceMotion ? false : { opacity: 0, y: 18 }}
@@ -43,7 +43,7 @@ export function Hero({ guestName }: HeroProps) {
         >
           Có một chuyện nhỏ
           <br />
-          mình muốn kể cho bạn nghe...
+          em muốn kể cho anh/chị nghe...
         </motion.p>
         <motion.div
           className="scroll-cue"

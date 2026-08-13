@@ -9,7 +9,7 @@ export function GraduationReveal() {
     <section className="story-section graduation-reveal" aria-labelledby="graduation-title">
       <div className="section-inner graduation-grid">
         <Reveal className="graduation-copy">
-          <SectionHeading eyebrow="chapter one" title="Mình sắp tốt nghiệp rồi!" align="left">
+          <SectionHeading eyebrow="chapter one" title="Em sắp tốt nghiệp rồi!" align="left">
             <p>
               Sau rất nhiều deadline,
               <br />
