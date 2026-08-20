@@ -1,6 +1,5 @@
 import { CalendarDays, Clock, MapPin } from "lucide-react"
 import { graduationConfig } from "../data/graduation"
-import { Countdown } from "./Countdown"
 import { Reveal } from "./ui/Reveal"
 import { SectionHeading } from "./ui/SectionHeading"
 
