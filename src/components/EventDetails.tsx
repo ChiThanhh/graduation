@@ -41,11 +41,6 @@ export function EventDetails() {
             </Reveal>
           ))}
         </div>
-
-        <Reveal className="countdown-panel">
-          <p>Counting down to my big day ♡</p>
-          <Countdown />
-        </Reveal>
       </div>
     </section>
   )

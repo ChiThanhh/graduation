@@ -5,7 +5,7 @@ export const graduationConfig = {
   university: "Nhà hát Hòa Bình",
   date: "2026-08-28",
   displayDate: "28.08.2026",
-  time: "13:00",
+  time: "14:00 - 15:00",
   locationName: "Nhà hát Hòa Bình",
   locationAddress: "240 Đường 3 Tháng 2, Phường 12, Quận 10, TP. Hồ Chí Minh",
   googleMapsUrl: "https://maps.app.goo.gl/ZoF8KbsPBVUZ12W87",
