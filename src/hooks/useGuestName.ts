@@ -8,11 +8,14 @@ export function useGuestName(initialGuestName = "") {
   const [guestName, setGuestNameState] = useState(() => {
     if (typeof window === "undefined") return cleanName(initialGuestName)
 
+    const preferredName = cleanName(initialGuestName)
+    if (preferredName) return preferredName
+
     try {
       const savedName = window.localStorage.getItem(STORAGE_KEY)
-      return savedName ? cleanName(savedName) : cleanName(initialGuestName)
+      return savedName ? cleanName(savedName) : preferredName
     } catch {
-      return cleanName(initialGuestName)
+      return preferredName
     }
   })
 

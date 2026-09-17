@@ -1,6 +1,6 @@
-import { Heart, MailCheck } from "lucide-react"
+import { Check, Heart, X } from "lucide-react"
 import { motion, useReducedMotion } from "motion/react"
-import { useMemo, useState, type FormEvent } from "react"
+import { useState } from "react"
 import { appConfig } from "../config"
 import { Reveal } from "./ui/Reveal"
 
@@ -10,31 +10,18 @@ type FinalMessageProps = {
 
 export function FinalMessage({ guestName }: FinalMessageProps) {
   const reduceMotion = useReducedMotion()
-  const [form, setForm] = useState({
-    name: "",
-    guestCount: 1,
-    cannotAttend: false,
-  })
+  const [pendingAttendance, setPendingAttendance] = useState<string | null>(null)
   const [submitted, setSubmitted] = useState(false)
+  const [submittedAttendance, setSubmittedAttendance] = useState("")
   const [submitError, setSubmitError] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const statusText = useMemo(() => {
-    if (submitted) return "Cảm ơn bạn đã phản hồi!"
-    return "Tôi sẽ chờ bạn ở đó ✨"
-  }, [submitted])
+  const handleSubmit = async () => {
+    if (isSubmitting || !pendingAttendance) return
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    if (isSubmitting) return
-
-    const trimmedName = form.name.trim()
     const payload = {
-      guestName: trimmedName || guestName || "Khách mời",
-      guestCount: form.guestCount,
-      cannotAttend: form.cannotAttend,
-      submittedAt: new Date().toISOString(),
-      source: "graduation_invitation",
+      guestName: guestName || "Khách mời",
+      attendance: pendingAttendance,
     }
 
     setIsSubmitting(true)
@@ -50,10 +37,7 @@ export function FinalMessage({ guestName }: FinalMessageProps) {
       if (appConfig.googleSheetEndpoint) {
         const formBody = new URLSearchParams({
           guestName: String(payload.guestName),
-          guestCount: String(payload.guestCount),
-          cannotAttend: String(payload.cannotAttend),
-          submittedAt: String(payload.submittedAt),
-          source: String(payload.source),
+          attendance: payload.attendance,
         })
 
         const response = await fetch(appConfig.googleSheetEndpoint, {
@@ -79,6 +63,8 @@ export function FinalMessage({ guestName }: FinalMessageProps) {
       console.log("RSVP submitted:", payload)
       setSubmitError("")
       setSubmitted(true)
+      setSubmittedAttendance(payload.attendance)
+      setPendingAttendance(null)
     } catch (error) {
       console.error("Failed to submit RSVP to Google Sheet:", error)
       setSubmitted(false)
@@ -95,87 +81,54 @@ export function FinalMessage({ guestName }: FinalMessageProps) {
       <Reveal className="final-card">
         <p className="final-english">LET&apos;S CELEBRATE!</p>
         <p className="final-tagline">Thank you for being part of my journey.</p>
-        <p className="final-tagline">See you at graduation.</p>
 
-        <form className="rsvp-card" onSubmit={handleSubmit}>
-          <div className="rsvp-field-wrap rsvp-field-wrap--name">
-            <label className="rsvp-label" htmlFor="guest-name">Tên của bạn</label>
-            <div className="rsvp-field rsvp-field--name">
-              <span className="rsvp-icon" aria-hidden="true">
-                <MailCheck size={18} />
-              </span>
-              <input
-                id="guest-name"
-                type="text"
-                value={form.name}
-                onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
-                placeholder={guestName ? `Nhập tên của bạn` : "Tên của bạn"}
-                aria-label="Tên của bạn"
-                required
-              />
+        <div className="rsvp-card">
+          <p className="rsvp-question">Bạn sẽ tham dự lễ tốt nghiệp chứ?</p>
+          <div className="rsvp-actions">
+            <button
+              type="button"
+              className="rsvp-choice rsvp-choice--yes"
+              onClick={() => setPendingAttendance("Tham dự")}
+              disabled={isSubmitting || submitted}
+            >
+              <Check size={20} />
+              <span>Tham dự</span>
+            </button>
+            <button
+              type="button"
+              className="rsvp-choice rsvp-choice--no"
+              onClick={() => setPendingAttendance("Không tham dự")}
+              disabled={isSubmitting || submitted}
+            >
+              <X size={20} />
+              <span>Không tham dự</span>
+            </button>
+          </div>
+        </div>
+
+        {pendingAttendance ? (
+          <div className="rsvp-dialog-backdrop" role="presentation">
+            <div className="rsvp-dialog" role="dialog" aria-modal="true" aria-labelledby="rsvp-dialog-title">
+              <p className="rsvp-dialog__eyebrow">Xác nhận phản hồi</p>
+              <h3 id="rsvp-dialog-title">Bạn xác nhận &quot;{pendingAttendance}&quot;?</h3>
+              <div className="rsvp-dialog__actions">
+                <button type="button" className="rsvp-dialog__cancel" onClick={() => setPendingAttendance(null)} disabled={isSubmitting}>
+                  Quay lại
+                </button>
+                <button type="button" className="rsvp-dialog__confirm" onClick={handleSubmit} disabled={isSubmitting} aria-busy={isSubmitting}>
+                  {isSubmitting ? <span className="rsvp-spinner" aria-hidden="true" /> : <Check size={18} />}
+                  {isSubmitting ? "Đang gửi..." : "Xác nhận"}
+                </button>
+              </div>
             </div>
           </div>
-
-          <div className="rsvp-field-wrap rsvp-field-wrap--count">
-            <label className="rsvp-label" htmlFor="guest-count">Số lượng khách</label>
-            <div className="rsvp-field rsvp-field--count">
-              <span className="rsvp-icon" aria-hidden="true">
-                <MailCheck size={18} />
-              </span>
-              <select
-                id="guest-count"
-                value={form.guestCount}
-                onChange={(event) =>
-                  setForm((current) => ({
-                    ...current,
-                    guestCount: Number(event.target.value),
-                  }))
-                }
-                aria-label="Số lượng khách"
-              >
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((value) => (
-                  <option key={value} value={value}>
-                    {value}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <button type="submit" className="rsvp-submit-button" disabled={isSubmitting} aria-busy={isSubmitting}>
-            {isSubmitting ? (
-              <>
-                <span className="rsvp-spinner" aria-hidden="true" />
-                <span>Đang gửi...</span>
-              </>
-            ) : (
-              <>
-                <MailCheck size={18} />
-                {submitted ? "Đã xác nhận" : "Xác nhận tham dự"}
-              </>
-            )}
-          </button>
-
-          <label className="rsvp-checkbox-row">
-            <input
-              type="checkbox"
-              checked={form.cannotAttend}
-              onChange={(event) =>
-                setForm((current) => ({
-                  ...current,
-                  cannotAttend: event.target.checked,
-                }))
-              }
-            />
-            <span>Tôi không thể tham dự</span>
-          </label>
-        </form>
+        ) : null}
 
         {submitError ? <p className="rsvp-message rsvp-message--error">{submitError}</p> : null}
         {submitted ? (
-          <p className="rsvp-message rsvp-message--success">Xác nhận thành công! Cảm ơn bạn đã phản hồi.</p>
+          <p className="rsvp-message rsvp-message--success">Đã ghi nhận: {submittedAttendance}. Cảm ơn bạn đã phản hồi!</p>
         ) : (
-          <p className="rsvp-status">{statusText}</p>
+          <p className="rsvp-message rsvp-message--info"></p>
         )}
 
         <motion.div

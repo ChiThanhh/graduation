@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
-const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbxWocxJi8ApEuAsXGGxwD-e3CRD2vGphLvTIcT3nwbEyjHtKFSewLF7MgUs-XZIxx7D/exec'
+const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbz2r28IoEltB7ZhyDtW1xtEvgWk1SwF_FgTKnhvoJuCnIDilUQOYbBS5wWLb6P0bTjE/exec'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],

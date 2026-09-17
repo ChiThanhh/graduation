@@ -12,10 +12,7 @@ export default async function handler(req, res) {
 
   const formBody = new URLSearchParams({
     guestName: String(payload.guestName ?? ''),
-    guestCount: String(payload.guestCount ?? 1),
-    cannotAttend: String(payload.cannotAttend === true || payload.cannotAttend === 'true'),
-    submittedAt: String(payload.submittedAt ?? new Date().toISOString()),
-    source: String(payload.source ?? 'graduation_invitation'),
+    attendance: String(payload.attendance ?? ''),
   })
 
   try {

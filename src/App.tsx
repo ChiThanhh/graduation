@@ -3,7 +3,6 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { EventDetails } from "./components/EventDetails"
 import { FinalMessage } from "./components/FinalMessage"
 import { Footer } from "./components/Footer"
-import { GraduationReveal } from "./components/GraduationReveal"
 import { Hero } from "./components/Hero"
 import { Location } from "./components/Location"
 import { MusicToggle } from "./components/MusicToggle"
@@ -33,8 +32,7 @@ function GraduationInvitation({
       </div>
       <main>
         <Hero guestName={guestName} />
-        <GraduationReveal />
-        <PersonalInvitation guestName={guestName} />
+        <PersonalInvitation />
         <EventDetails />
         <Location />
         <FinalMessage guestName={guestName} />

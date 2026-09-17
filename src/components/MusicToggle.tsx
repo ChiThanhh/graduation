@@ -19,7 +19,7 @@ export function MusicToggle() {
     }
 
     try {
-      audio.volume = 0.10
+      audio.volume = 0.15
       await audio.play()
       setIsPlaying(true)
     } catch {

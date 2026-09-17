@@ -5,22 +5,17 @@ import { graduationConfig } from "../data/graduation"
 import { Reveal } from "./ui/Reveal"
 import { Sticker } from "./ui/Sticker"
 
-type PersonalInvitationProps = {
-  guestName: string
-}
-
-export function PersonalInvitation({ guestName }: PersonalInvitationProps) {
+export function PersonalInvitation() {
   const reduceMotion = useReducedMotion()
   const letterBodyRef = useRef<HTMLDivElement>(null)
   const isLetterInView = useInView(letterBodyRef, { once: true, amount: 0.45 })
   const [isTypingDone, setIsTypingDone] = useState(false)
   const letterText = `
-Mỗi chặng đường đều có một điểm dừng để nhìn lại,
-và lễ tốt nghiệp là một cột mốc đánh dấu những nỗ lực, trưởng thành và những ký ức đẹp của một hành trình thanh xuân.
+Ngày tốt nghiệp sẽ ý nghĩa hơn rất nhiều khi có những người mình yêu quý cùng hiện diện.
 
-Mình trân trọng kính mời gia đình, người thân và bạn bè đến tham dự lễ tốt nghiệp để chia sẽ niềm vui và lưu giữ những khoảnh khác đáng nhớ này. Sự hiện diện của mọi người sẽ là niềm vinh hạnh và là món quà ý nghĩa nhất đối với mình
+Thân mời gia đình, anh chị và bạn bè đến chung vui cùng mình trong khoảnh khắc đặc biệt này. Cảm ơn mọi người vì đã luôn là một phần thật đẹp trong hành trình của mình.
 
-Rất mong được gặp và đón tiếp mọi người trong ngày đặc biệt này.
+Hẹn gặp nhau tại lễ tốt nghiệp nhé!
 With love,
 ${graduationConfig.graduateName} ♡`
   const shouldShowFullLetter = reduceMotion || isTypingDone
@@ -33,10 +28,6 @@ ${graduationConfig.graduateName} ♡`
             <Sticker className="letter-heart">♡</Sticker>
             <div className="letter-content">
               <p className="letter-date">a little note</p>
-              <h2 id="invitation-title">
-                Dear <span className="name-underline">{guestName}</span>
-              </h2>
-
               <div
                 className="letter-body letter-body--typewriter"
                 ref={letterBodyRef}
