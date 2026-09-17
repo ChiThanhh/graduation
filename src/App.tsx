@@ -64,6 +64,7 @@ function App() {
         touchMultiplier: 1.08,
       }}
     >
+      
       <AnimatePresence mode="wait">
         <GraduationInvitation
           key="invitation"
