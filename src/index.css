@@ -2,17 +2,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f3faf7;
-  --foreground: #1f3d3a;
-  --muted: #58726f;
-  --cream: #eef8f5;
-  --paper: #ffffff;
-  --pink: #dfeff1;
-  --pink-strong: #2a8b86;
-  --blue: #e1f0f4;
-  --yellow: #ecf5d8;
-  --lavender: #e5efee;
-  --shadow: 0 22px 56px rgb(31 61 58 / 0.12);
+  --background: #f4edf9;
+  --foreground: #4d3f64;
+  --muted: #6c5d80;
+  --cream: #f8f1ff;
+  --paper: #fffdfd;
+  --pink: #e9dff9;
+  --pink-strong: #8b6cc8;
+  --blue: #e9e2ff;
+  --yellow: #f3ebff;
+  --lavender: #dcd0f5;
+  --shadow: 0 22px 56px rgb(89 68 117 / 0.12);
   color: var(--foreground);
   background: var(--background);
   font-family: "Nunito", system-ui, sans-serif;
@@ -55,8 +55,8 @@ body {
   overflow-x: hidden;
   overscroll-behavior-y: contain;
   background:
-    radial-gradient(circle at 16px 16px, rgb(130 186 180 / 0.16) 1px, transparent 1.4px),
-    linear-gradient(180deg, #f4fbf8 0%, #f2f9f7 100%);
+    radial-gradient(circle at 16px 16px, rgb(182 163 222 / 0.12) 1px, transparent 1.4px),
+    linear-gradient(180deg, #f7f0ff 0%, #efe7ff 100%);
   background-size: 30px 30px, cover;
 }
 
@@ -903,6 +903,8 @@ main,
 .final-card {
   width: min(100%, 760px);
   margin: 0 auto;
+  padding: 0;
+  text-align: center;
 }
 
 .final-card p {
@@ -916,13 +918,110 @@ main,
 .final-english {
   color: var(--foreground) !important;
   font-family: "Patrick Hand", cursive;
-  font-size: clamp(2.2rem, 10vw, 4rem) !important;
+  font-size: clamp(2.5rem, 9vw, 4.5rem) !important;
   line-height: 1.05 !important;
+  letter-spacing: 0.04em;
+}
+
+.final-tagline {
+  margin: 0;
+  color: var(--foreground) !important;
+  font-family: "Patrick Hand", cursive;
+  font-size: clamp(1.9rem, 6vw, 2.8rem) !important;
+  line-height: 1.4 !important;
 }
 
 .final-card span {
   color: var(--muted);
   font-weight: 700;
+}
+
+.rsvp-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1.45fr);
+  gap: 18px;
+  align-items: center;
+  width: min(100%, 980px);
+  margin: 28px auto 0;
+  padding: 20px 22px;
+  background: rgb(255 255 255 / 0.44);
+  border: 1px solid rgb(140 108 200 / 0.15);
+  border-radius: 28px;
+  box-shadow: 0 18px 42px rgb(89 68 117 / 0.08);
+}
+
+.rsvp-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 68px;
+  padding: 0 18px;
+  background: rgb(255 255 255 / 0.5);
+  border: 1px solid rgb(127 108 171 / 0.18);
+  border-radius: 18px;
+}
+
+.rsvp-icon {
+  display: inline-grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  color: var(--foreground);
+  opacity: 0.8;
+}
+
+.rsvp-field input,
+.rsvp-field select {
+  flex: 1;
+  min-width: 0;
+  color: var(--foreground);
+  font: inherit;
+  background: transparent;
+  border: 0;
+  outline: none;
+}
+
+.rsvp-field input::placeholder {
+  color: rgb(109 93 128 / 0.72);
+}
+
+.rsvp-submit-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 68px;
+  padding: 0 20px;
+  color: #fff;
+  font-weight: 800;
+  background: linear-gradient(135deg, #8b6cc8 0%, #7b5bb0 100%);
+  border: 0;
+  border-radius: 18px;
+  box-shadow: 0 18px 28px rgb(139 108 200 / 0.32);
+  cursor: pointer;
+}
+
+.rsvp-checkbox-row {
+  grid-column: 1 / -1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rsvp-checkbox-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--pink-strong);
+}
+
+.rsvp-status {
+  margin: 18px 0 0;
+  color: var(--foreground);
+  font-weight: 800;
 }
 
 .soft-heart {

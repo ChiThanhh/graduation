@@ -4,15 +4,15 @@ const STORAGE_KEY = "graduation_guest_name"
 
 const cleanName = (name: string) => name.trim().slice(0, 50)
 
-export function useGuestName() {
+export function useGuestName(initialGuestName = "") {
   const [guestName, setGuestNameState] = useState(() => {
-    if (typeof window === "undefined") return ""
+    if (typeof window === "undefined") return cleanName(initialGuestName)
 
     try {
       const savedName = window.localStorage.getItem(STORAGE_KEY)
-      return savedName ? cleanName(savedName) : ""
+      return savedName ? cleanName(savedName) : cleanName(initialGuestName)
     } catch {
-      return ""
+      return cleanName(initialGuestName)
     }
   })
 

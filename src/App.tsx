@@ -4,7 +4,6 @@ import { EventDetails } from "./components/EventDetails"
 import { FinalMessage } from "./components/FinalMessage"
 import { Footer } from "./components/Footer"
 import { GraduationReveal } from "./components/GraduationReveal"
-import { GuestEntrance } from "./components/GuestEntrance"
 import { Hero } from "./components/Hero"
 import { Location } from "./components/Location"
 import { MusicToggle } from "./components/MusicToggle"
@@ -49,7 +48,13 @@ function GraduationInvitation({
 }
 
 function App() {
-  const { guestName, setGuestName, clearGuestName, hasGuest } = useGuestName()
+  const guestNameFromQuery = (() => {
+    if (typeof window === "undefined") return ""
+    const params = new URLSearchParams(window.location.search)
+    return params.get("name") ?? ""
+  })()
+
+  const { guestName, clearGuestName } = useGuestName(guestNameFromQuery)
 
   return (
     <ReactLenis
@@ -62,15 +67,11 @@ function App() {
       }}
     >
       <AnimatePresence mode="wait">
-        {!hasGuest ? (
-          <GuestEntrance key="entrance" onSubmit={setGuestName} />
-        ) : (
-          <GraduationInvitation
-            key="invitation"
-            guestName={guestName}
-            onResetName={clearGuestName}
-          />
-        )}
+        <GraduationInvitation
+          key="invitation"
+          guestName={guestName || "bạn"}
+          onResetName={clearGuestName}
+        />
       </AnimatePresence>
     </ReactLenis>
   )

@@ -1,7 +1,6 @@
 import { GraduationCap } from "lucide-react"
 import { Polaroid } from "./ui/Polaroid"
 import { Reveal } from "./ui/Reveal"
-import { SectionHeading } from "./ui/SectionHeading"
 import { Sticker } from "./ui/Sticker"
 
 export function GraduationReveal() {
@@ -9,16 +8,6 @@ export function GraduationReveal() {
     <section className="story-section graduation-reveal" aria-labelledby="graduation-title">
       <div className="section-inner graduation-grid">
         <Reveal className="graduation-copy">
-          <SectionHeading eyebrow="chapter one" title="Mình sắp tốt nghiệp rồi!" align="left">
-            <p>
-              Sau rất nhiều deadline,
-              <br />
-              những buổi sáng vội vàng,
-              <br />
-              và cả những đêm thức khuya...
-            </p>
-            <p>cuối cùng ngày này cũng tới.</p>
-          </SectionHeading>
           <p className="highlight-line">
             <GraduationCap size={24} />
             I&apos;m graduating! ✨
