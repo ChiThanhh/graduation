@@ -12,10 +12,19 @@ export function MusicToggle() {
     const audio = audioRef.current
     if (!audio) return
 
-    audio.volume = 0.15
-    audio.play().catch(() => {
-      setIsPlaying(false)
-    })
+    const playMusic = () => {
+      audio.volume = 0.15
+      audio.play().catch(() => setIsPlaying(false))
+    }
+
+    playMusic()
+    window.addEventListener("pointerdown", playMusic, { once: true })
+    window.addEventListener("keydown", playMusic, { once: true })
+
+    return () => {
+      window.removeEventListener("pointerdown", playMusic)
+      window.removeEventListener("keydown", playMusic)
+    }
   }, [])
 
   const toggleMusic = async () => {
@@ -34,7 +43,6 @@ export function MusicToggle() {
       setIsPlaying(true)
     } catch {
       setIsPlaying(false)
-      setIsUnavailable(true)
     }
   }
 
