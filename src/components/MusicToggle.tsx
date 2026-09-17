@@ -1,12 +1,22 @@
 import { Music2, Volume2, VolumeX } from "lucide-react"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const MUSIC_SRC = "/music/background.mp3"
 
 export function MusicToggle() {
   const audioRef = useRef<HTMLAudioElement>(null)
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(true)
   const [isUnavailable, setIsUnavailable] = useState(false)
+
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    audio.volume = 0.15
+    audio.play().catch(() => {
+      setIsPlaying(false)
+    })
+  }, [])
 
   const toggleMusic = async () => {
     const audio = audioRef.current
@@ -34,6 +44,7 @@ export function MusicToggle() {
         ref={audioRef}
         src={MUSIC_SRC}
         loop
+        autoPlay
         preload="metadata"
         onError={() => {
           setIsPlaying(false)
