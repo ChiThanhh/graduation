@@ -1,5 +1,6 @@
 import { CalendarDays, Clock, MapPin } from "lucide-react"
 import { graduationConfig } from "../data/graduation"
+import { Countdown } from "./Countdown"
 import { Reveal } from "./ui/Reveal"
 import { SectionHeading } from "./ui/SectionHeading"
 
@@ -27,8 +28,14 @@ export function EventDetails() {
       <div className="section-inner">
         <Reveal>
           <SectionHeading eyebrow="save this" title="Save the date ♡">
-            <p>Để dành một góc lịch cho em nha.</p>
+            <p>Để dành một góc lịch cho mình nha.</p>
           </SectionHeading>
+        </Reveal>
+
+        <Reveal delay={0.08}>
+          <div className="countdown-panel">
+            <Countdown />
+          </div>
         </Reveal>
 
         <div className="event-cards">

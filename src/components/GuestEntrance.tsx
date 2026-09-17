@@ -65,10 +65,9 @@ export function GuestEntrance({ onSubmit }: GuestEntranceProps) {
         </span>
         <p className="entrance-kicker">Hey there!</p>
         <h1 id="entrance-title">Trước khi mở thư...</h1>
-        <p>Em có thể gọi anh/chị là gì haaaaa ♡</p>
 
         <label className="sr-only" htmlFor="guest-name">
-          Nhập họ tên
+          Nhập tên của bạnnnn
         </label>
         <input
           ref={inputRef}
@@ -76,7 +75,7 @@ export function GuestEntrance({ onSubmit }: GuestEntranceProps) {
           value={name}
           autoFocus
           maxLength={50}
-          placeholder="Nhập họ tên..."
+          placeholder=" Nhập tên của bạnnnn..."
           onChange={(event) => setName(event.target.value)}
         />
 

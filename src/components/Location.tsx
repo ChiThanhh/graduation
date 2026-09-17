@@ -9,7 +9,7 @@ export function Location() {
       <div className="section-inner location-grid">
         <Reveal>
           <SectionHeading eyebrow="meet me" title="See you here!" align="left">
-            <p>Em sẽ chờ anh/chị ở đây, nhớ tới chụp hình với em nha.</p>
+            <p>Mình sẽ chờ bạn ở đây, nhớ tới chụp hình với mình nha.</p>
           </SectionHeading>
           <div className="location-copy">
             <h3>{graduationConfig.locationName}</h3>
@@ -31,9 +31,12 @@ export function Location() {
           <iframe
             src={graduationConfig.googleMapsEmbedUrl}
             title={`Bản đồ ${graduationConfig.locationName}`}
+            width="600"
+            height="450"
+            style={{ border: 0 }}
             loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
           />
         </Reveal>
       </div>

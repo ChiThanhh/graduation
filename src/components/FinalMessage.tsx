@@ -16,7 +16,7 @@ export function FinalMessage({ guestName }: FinalMessageProps) {
         <p>
           Hy vọng ngày hôm đó
           <br />
-          em sẽ nhìn thấy anh/chị ở đó.
+          mình sẽ nhìn thấy bạn ở đó.
         </p>
         <p className="final-english">See you on my graduation day!</p>
         <span>Thanks for being part of my journey.</span>

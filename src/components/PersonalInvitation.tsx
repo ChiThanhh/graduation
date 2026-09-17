@@ -1,8 +1,7 @@
 import { useRef, useState } from "react"
 import { Typewriter } from "react-simple-typewriter"
-import { motion, useInView, useReducedMotion } from "motion/react"
+import { useInView, useReducedMotion } from "motion/react"
 import { graduationConfig } from "../data/graduation"
-import { Polaroid } from "./ui/Polaroid"
 import { Reveal } from "./ui/Reveal"
 import { Sticker } from "./ui/Sticker"
 
@@ -10,51 +9,18 @@ type PersonalInvitationProps = {
   guestName: string
 }
 
-const letterPhotos = [
-  {
-    className: "letter-photo--one",
-    src: "/image/4.png",
-    alt: "Graduation photo 1",
-    caption: "sweet memory",
-    rotate: "-5deg",
-    delay: 0,
-  },
-  {
-    className: "letter-photo--two",
-    src: "/image/5.png",
-    alt: "Graduation photo 2",
-    caption: "little joy",
-    rotate: "4deg",
-    delay: 0.12,
-  },
-  {
-    className: "letter-photo--three",
-    src: "/image/6.png",
-    alt: "Graduation photo 3",
-    caption: "see you there",
-    rotate: "-3deg",
-    delay: 0.24,
-  },
-]
-
 export function PersonalInvitation({ guestName }: PersonalInvitationProps) {
   const reduceMotion = useReducedMotion()
   const letterBodyRef = useRef<HTMLDivElement>(null)
   const isLetterInView = useInView(letterBodyRef, { once: true, amount: 0.45 })
   const [isTypingDone, setIsTypingDone] = useState(false)
-  const letterText = `Sau một hành trình thật dài,
-cuối cùng em cũng đã đến ngày tốt nghiệp.
+  const letterText = `
+Mỗi chặng đường đều có một điểm dừng để nhìn lại,
+và lễ tốt nghiệp là một cột mốc đánh dấu những nỗ lực, trưởng thành và những ký ức đẹp của một hành trình thanh xuân.
 
-Và trong ngày đặc biệt này,
-em thật sự rất muốn ${guestName} có mặt.
+Mình trân trọng kính mời gia đình, người thân và bạn bè đến tham dự lễ tốt nghiệp để chia sẽ niềm vui và lưu giữ những khoảnh khác đáng nhớ này. Sự hiện diện của mọi người sẽ là niềm vinh hạnh và là món quà ý nghĩa nhất đối với mình
 
-Không cần món quà gì đâu.
-
-Chỉ cần anh/chị đến,
-chụp với em vài tấm hình,
-và cùng em giữ lại một chút kỷ niệm
-là đủ rồi ♡
-
+Rất mong được gặp và đón tiếp mọi người trong ngày đặc biệt này.
 With love,
 ${graduationConfig.graduateName} ♡`
   const shouldShowFullLetter = reduceMotion || isTypingDone
@@ -100,39 +66,6 @@ ${graduationConfig.graduateName} ♡`
 
             </div>
 
-            <div className="letter-photo-stack" aria-label="Graduation photos">
-              {letterPhotos.map((photo, index) => (
-                <motion.div
-                  className={`letter-photo ${photo.className}`}
-                  key={photo.src}
-                  initial={reduceMotion ? false : { opacity: 0, y: 28, scale: 0.9, rotate: -2 }}
-                  whileInView={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1, rotate: 0 }}
-                  animate={reduceMotion ? undefined : { y: [0, index % 2 === 0 ? -4 : 4, 0] }}
-                  whileHover={reduceMotion ? undefined : { scale: 1.045, zIndex: 8 }}
-                  whileTap={reduceMotion ? undefined : { scale: 0.98 }}
-                  viewport={{ once: true, amount: 0.35 }}
-                  transition={{
-                    opacity: { duration: 0.5, delay: photo.delay },
-                    y: {
-                      duration: 4.6 + index * 0.4,
-                      delay: 0.5 + photo.delay,
-                      repeat: Number.POSITIVE_INFINITY,
-                      ease: "easeInOut",
-                    },
-                    scale: { duration: 0.5, delay: photo.delay },
-                    rotate: { duration: 0.5, delay: photo.delay },
-                  }}
-                >
-                  <Sticker className={`letter-photo-tape letter-photo-tape--${index + 1}`}> </Sticker>
-                  <Polaroid
-                    src={photo.src}
-                    alt={photo.alt}
-                    caption={photo.caption}
-                    rotate={photo.rotate}
-                  />
-                </motion.div>
-              ))}
-            </div>
           </article>
         </Reveal>
       </div>
