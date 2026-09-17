@@ -1,10 +1,7 @@
 import { graduationConfig } from "../data/graduation"
 
-type FooterProps = {
-  onResetName: () => void
-}
 
-export function Footer({ onResetName }: FooterProps) {
+export function Footer() {
   return (
     <footer className="site-footer">
       <p>Made with ♡ by {graduationConfig.graduateName}</p>

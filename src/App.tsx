@@ -12,10 +12,8 @@ import { useGuestName } from "./hooks/useGuestName"
 
 function GraduationInvitation({
   guestName,
-  onResetName,
 }: {
   guestName: string
-  onResetName: () => void
 }) {
   const reduceMotion = useReducedMotion()
 
@@ -42,7 +40,7 @@ function GraduationInvitation({
         <FinalMessage guestName={guestName} />
       </main>
       <MusicToggle />
-      <Footer onResetName={onResetName} />
+      <Footer/>
     </motion.div>
   )
 }
@@ -54,7 +52,7 @@ function App() {
     return params.get("name") ?? ""
   })()
 
-  const { guestName, clearGuestName } = useGuestName(guestNameFromQuery)
+  const { guestName } = useGuestName(guestNameFromQuery)
 
   return (
     <ReactLenis
@@ -70,7 +68,6 @@ function App() {
         <GraduationInvitation
           key="invitation"
           guestName={guestName || "bạn"}
-          onResetName={clearGuestName}
         />
       </AnimatePresence>
     </ReactLenis>
