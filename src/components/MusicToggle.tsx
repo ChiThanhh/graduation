@@ -2,6 +2,7 @@ import { Music2, Volume2, VolumeX } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 
 const MUSIC_SRC = "/music/background.mp3"
+const MUSIC_START_TIME = 125
 
 export function MusicToggle() {
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -14,6 +15,7 @@ export function MusicToggle() {
 
     const playMusic = () => {
       audio.volume = 0.15
+      if (audio.currentTime === 0) audio.currentTime = MUSIC_START_TIME
       audio.play().catch(() => setIsPlaying(false))
     }
 
