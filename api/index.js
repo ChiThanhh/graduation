@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
   const scriptUrl =
     process.env.GOOGLE_APPS_SCRIPT_URL ||
-    'https://script.google.com/macros/s/AKfycbxWocxJi8ApEuAsXGGxwD-e3CRD2vGphLvTIcT3nwbEyjHtKFSewLF7MgUs-XZIxx7D/exec'
+    'https://script.google.com/macros/s/AKfycbz2r28IoEltB7ZhyDtW1xtEvgWk1SwF_FgTKnhvoJuCnIDilUQOYbBS5wWLb6P0bTjE/exec'
 
   const payload = typeof req.body === 'string' ? Object.fromEntries(new URLSearchParams(req.body)) : req.body || {}
 
