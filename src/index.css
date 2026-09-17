@@ -406,15 +406,24 @@ main,
   width: min(100%, 720px);
 }
 
-.hero-note {
-  display: inline-block;
-  padding: 7px 14px;
-  margin: 0 0 18px;
+.hero-headline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
   color: var(--pink-strong);
   font-weight: 800;
   background: rgb(232 246 242 / 0.82);
   border: 1px solid rgb(126 182 172 / 0.3);
   border-radius: 999px;
+  box-shadow: 0 10px 22px rgb(109 151 146 / 0.08);
 }
 
 .hero-section h1 {
@@ -940,7 +949,7 @@ main,
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1.45fr);
   gap: 18px;
-  align-items: center;
+  align-items: end;
   width: min(100%, 980px);
   margin: 28px auto 0;
   padding: 20px 22px;
@@ -948,6 +957,22 @@ main,
   border: 1px solid rgb(140 108 200 / 0.15);
   border-radius: 28px;
   box-shadow: 0 18px 42px rgb(89 68 117 / 0.08);
+}
+
+.rsvp-field-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  text-align: left;
+}
+
+.rsvp-label {
+  display: block;
+  color: var(--foreground);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
 }
 
 .rsvp-field {
@@ -979,6 +1004,28 @@ main,
   background: transparent;
   border: 0;
   outline: none;
+  appearance: none;
+}
+
+.rsvp-field select {
+  position: relative;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--foreground) 50%),
+    linear-gradient(135deg, var(--foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(50% - 2px),
+    calc(100% - 12px) calc(50% - 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 30px;
+  border-radius: 12px;
+  color: var(--foreground);
+}
+
+.rsvp-field select option {
+  color: var(--foreground);
+  background: #fff;
+  font-weight: 700;
 }
 
 .rsvp-field input::placeholder {
@@ -999,6 +1046,26 @@ main,
   border-radius: 18px;
   box-shadow: 0 18px 28px rgb(139 108 200 / 0.32);
   cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+}
+
+.rsvp-submit-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 20px 30px rgb(139 108 200 / 0.38);
+}
+
+.rsvp-submit-button:disabled {
+  cursor: wait;
+  opacity: 0.9;
+}
+
+.rsvp-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgb(255 255 255 / 0.65);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: rsvp-spin 0.8s linear infinite;
 }
 
 .rsvp-checkbox-row {
@@ -1013,15 +1080,79 @@ main,
 }
 
 .rsvp-checkbox-row input {
+  position: relative;
   width: 18px;
   height: 18px;
-  accent-color: var(--pink-strong);
+  appearance: none;
+  background: rgb(255 255 255 / 0.86);
+  border: 1.5px solid rgb(139 108 200 / 0.7);
+  border-radius: 6px;
+  transition: all 180ms ease;
+}
+
+.rsvp-checkbox-row input:checked {
+  background: var(--pink-strong);
+  border-color: var(--pink-strong);
+}
+
+.rsvp-checkbox-row input:checked::after {
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  width: 5px;
+  height: 9px;
+  content: "";
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.rsvp-status,
+.rsvp-message {
+  margin: 18px 0 0;
+  font-weight: 800;
 }
 
 .rsvp-status {
-  margin: 18px 0 0;
   color: var(--foreground);
-  font-weight: 800;
+}
+
+.rsvp-message {
+  animation: rsvp-fade-up 220ms ease-out;
+}
+
+.rsvp-message--success {
+  color: #1f7859;
+  background: rgb(206 242 226 / 0.9);
+  border: 1px solid rgb(50 166 118 / 0.22);
+  border-radius: 18px;
+  padding: 14px 18px;
+}
+
+.rsvp-message--error {
+  color: #8a3949;
+  background: rgb(252 237 240 / 0.95);
+  border: 1px solid rgb(206 114 130 / 0.32);
+  border-radius: 18px;
+  padding: 14px 18px;
+}
+
+@keyframes rsvp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rsvp-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .soft-heart {
@@ -1033,6 +1164,66 @@ main,
   color: var(--pink-strong);
   background: var(--cream);
   border-radius: 999px;
+}
+
+@media (max-width: 520px) {
+  .rsvp-card {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+    padding: 14px 12px;
+    border-radius: 20px;
+    box-shadow: 0 14px 36px rgb(89 68 117 / 0.08);
+  }
+
+  .rsvp-field-wrap {
+    min-width: 0;
+  }
+
+  .rsvp-field {
+    min-height: 56px;
+    gap: 10px;
+    padding: 0 12px;
+    border-radius: 14px;
+  }
+
+  .rsvp-icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .rsvp-field input,
+  .rsvp-field select {
+    font-size: 0.98rem;
+  }
+
+  .rsvp-submit-button {
+    grid-column: 1 / -1;
+    min-height: 56px;
+    width: 100%;
+    border-radius: 14px;
+  }
+
+  .rsvp-checkbox-row {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    padding: 6px 4px 0;
+    text-align: left;
+    font-size: 0.94rem;
+  }
+
+  .rsvp-message,
+  .rsvp-status {
+    margin-top: 14px;
+    font-size: 0.96rem;
+  }
+
+  .rsvp-message--success,
+  .rsvp-message--error {
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
 }
 
 .site-footer {

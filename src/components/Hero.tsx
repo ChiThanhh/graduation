@@ -26,15 +26,15 @@ export function Hero({ guestName }: HeroProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
-        <motion.p
-          className="hero-note"
+        <motion.div
+          className="hero-headline"
           initial={reduceMotion ? false : { opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.55, delay: 0.15 }}
         >
-          thư nhỏ xinh này là của bạn ♡
-        </motion.p>
-        <h1 id="hero-title+">Hey, {guestName}! ♡</h1>
+          <span className="hero-badge">I&apos;m graduating!</span>
+          <h1 id="hero-title">Hey, {guestName}! ♡</h1>
+        </motion.div>
         <motion.p
           className="hero-copy"
           initial={reduceMotion ? false : { opacity: 0, y: 18 }}
