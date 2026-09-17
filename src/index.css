@@ -448,7 +448,7 @@ main,
 .hero-section h1 {
   margin: 0;
   font-family: "Patrick Hand", cursive;
-  font-size: clamp(4rem, 20vw, 8rem);
+  font-size: clamp(3.5rem, 17vw, 6.8rem);
   line-height: 0.9;
 }
 
@@ -1533,7 +1533,7 @@ main,
   }
 
   .hero-sticker--cap {
-    top: 13%;
+    top: 6%;
     right: 8%;
   }
 
