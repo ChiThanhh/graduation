@@ -11,6 +11,7 @@ type FinalMessageProps = {
 export function FinalMessage({ guestName }: FinalMessageProps) {
   const reduceMotion = useReducedMotion()
   const [pendingAttendance, setPendingAttendance] = useState<string | null>(null)
+  const [message, setMessage] = useState("")
   const [submitted, setSubmitted] = useState(false)
   const [submittedAttendance, setSubmittedAttendance] = useState("")
   const [submitError, setSubmitError] = useState("")
@@ -22,6 +23,7 @@ export function FinalMessage({ guestName }: FinalMessageProps) {
     const payload = {
       guestName: guestName || "Khách mời",
       attendance: pendingAttendance,
+      message: message.trim().slice(0, 500),
     }
 
     setIsSubmitting(true)
@@ -38,6 +40,7 @@ export function FinalMessage({ guestName }: FinalMessageProps) {
         const formBody = new URLSearchParams({
           guestName: String(payload.guestName),
           attendance: payload.attendance,
+          message: payload.message,
         })
 
         const response = await fetch(appConfig.googleSheetEndpoint, {
@@ -111,6 +114,21 @@ export function FinalMessage({ guestName }: FinalMessageProps) {
             <div className="rsvp-dialog" role="dialog" aria-modal="true" aria-labelledby="rsvp-dialog-title">
               <p className="rsvp-dialog__eyebrow">Xác nhận phản hồi</p>
               <h3 id="rsvp-dialog-title">Bạn xác nhận &quot;{pendingAttendance}&quot;?</h3>
+              <div className="rsvp-field-wrap">
+       
+                <div className="rsvp-field rsvp-field--textarea">
+                  <Heart className="rsvp-icon" size={20} aria-hidden="true" />
+                  <textarea
+                    id="rsvp-message"
+                    value={message}
+                    maxLength={500}
+                    placeholder="Viết lời chúc của bạn..."
+                    onChange={(event) => setMessage(event.target.value)}
+                    disabled={isSubmitting}
+                    rows={4}
+                  />
+                </div>
+              </div>
               <div className="rsvp-dialog__actions">
                 <button type="button" className="rsvp-dialog__cancel" onClick={() => setPendingAttendance(null)} disabled={isSubmitting}>
                   Quay lại

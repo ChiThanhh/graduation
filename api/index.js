@@ -6,13 +6,14 @@ export default async function handler(req, res) {
 
   const scriptUrl =
     process.env.GOOGLE_APPS_SCRIPT_URL ||
-    'https://script.google.com/macros/s/AKfycbz2r28IoEltB7ZhyDtW1xtEvgWk1SwF_FgTKnhvoJuCnIDilUQOYbBS5wWLb6P0bTjE/exec'
+    'https://script.google.com/macros/s/AKfycbxQ09E6sitrfif9VZJs4kLg0wugTgMuLjSeso2AwgdvJxaZwgEglspxc237oLEt80YA/exec'
 
   const payload = typeof req.body === 'string' ? Object.fromEntries(new URLSearchParams(req.body)) : req.body || {}
 
   const formBody = new URLSearchParams({
     guestName: String(payload.guestName ?? ''),
     attendance: String(payload.attendance ?? ''),
+    message: String(payload.message ?? ''),
   })
 
   try {

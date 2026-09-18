@@ -9,7 +9,7 @@ export function Location() {
       <div className="section-inner location-grid">
         <Reveal>
           <SectionHeading eyebrow="meet me" title="See you here!" align="left">
-            <p>Mình sẽ chờ bạn ở đây, nhớ tới chụp hình với mình nha.</p>
+            <p>Contact: Hạ Vy - 0878807611</p>
           </SectionHeading>
           <div className="location-copy">
             <h3>{graduationConfig.locationName}</h3>
